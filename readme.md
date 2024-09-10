@@ -10,4 +10,5 @@
 6. 转发事件（forward）：转发 SDP 邀请
 
 # 使用方法
-终端中执行 node websocketServer.js
+1. 终端中执行 node websocketServer.js
+2. 前端连接 ws://127.0.0.1:8088

@@ -37,15 +37,19 @@ wss.on('connection', function connection(ws, request) { // 监听 connection 事
     listenMsg(randomNum, ws)
 
     // 监听 close 事件
-    listenClose(randomNum, instance)
+    listenClose(randomNum, ws)
 
     // 超时自动断开
-    whenTimeout(instance)
+    whenTimeout(ws)
 })
+
+let pcofferTemp
+let answerTemp
+let candidateTemp
 
 function listenMsg(randomNum, instance) {
     instance.on('message', function (message) {
-        console.log('服务端收到消息:', message.toString('utf8'))
+        // console.log('服务端收到消息:', message.toString('utf8'))
 
         let parsedMessage = {
             // action: '操作类型',
@@ -86,7 +90,20 @@ function listenMsg(randomNum, instance) {
                 instance.sendError('用户不存在')
             }
         } else if (action === 'forward') { //! 处理转发
+            console.error('data.event', data.event)
             instance.sendRemote(data.event, data.data)
+        } else if (action === 'pcoffer') {
+            console.error('pcoffer', data.pcoffer)
+            pcofferTemp = data.pcoffer
+            instance.sendDataWithJSON('pcoffer-for-createAnswer', { res: pcofferTemp })
+        } else if (action === 'answer') {
+            console.error('answer', data.answer)
+            answerTemp = data.answer
+            instance.sendDataWithJSON('answer-for-set-remote', { res: answerTemp })
+        } else if (action === 'candidate') {
+            console.log('candidate', data.candidate)
+            candidateTemp = data.candidate
+            instance.sendDataWithJSON('for-pupe-addIce', { res: candidateTemp })
         }
     })
 }

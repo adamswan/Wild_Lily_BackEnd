@@ -110,6 +110,9 @@ function listenMsg(randomNum, instance) {
 
 function listenClose(randomNum, instance) {
     instance.on('close', () => {
+        pcofferTemp = ''
+        answerTemp = ''
+        candidateTemp = ''
         map.delete(randomNum)
         delete instance.sendRemote
         clearTimeout(instance._closeTimeout)

@@ -1,5 +1,8 @@
 # 介绍
 【野百合远程控制】是我的第 2 个全栈项目，这是后端部分。基于 ws 库从 0 到 1 实现了一个简单的 websocket 服务，以支撑前端业务。前段端部分采用 Electron 实现。
+
+前端部分：https://github.com/adamswan/Wild_Lily_FrontEnd
+
 掘金文章地址：https://juejin.cn/post/7413356439474995215
 
 # 实现思路
